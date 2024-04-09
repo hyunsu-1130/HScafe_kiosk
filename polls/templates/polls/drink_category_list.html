@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>음료 카테고리 리스트</title>
+</head>
+<body>
+    <h1>음료 카테고리 리스트</h1>
+    <ul>
+        {% for category in categories %}
+            <li><a href="{% url 'drink_list' category.id %}">{{ category.category_of_drink }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

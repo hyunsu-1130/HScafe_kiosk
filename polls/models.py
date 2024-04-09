@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils import timezone
 
 
 
@@ -37,4 +37,23 @@ class ChoiceDrink(models.Model):
       ]
   temperature = models.CharField(max_length=1, choices=HOT_OR_ICE_CHOICES, default=BOTH_OK)
   
+  def __str__(self) :
+      return self.name_of_drink
+  
 
+
+# 주문 정보 
+class Order(models.Model):
+  order_item = models.ForeignKey(ChoiceDrink, on_delete=models.CASCADE, default=None)
+  order_date = models.DateTimeField(auto_now=True)
+  order_item_count = models.IntegerField()
+  order_price = models.DecimalField(max_digits=8, decimal_places=2)
+
+  def __str__(self):
+        return f"Order #{self.pk}"
+
+  def save(self, *args, **kwargs):
+    # 주문 가격 계산
+        if self.order_item and self.order_item_count:
+            self.order_price = self.order_item.price * self.order_item_count
+        super().save(*args, **kwargs)

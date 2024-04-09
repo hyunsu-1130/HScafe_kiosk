@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>음료 종류 리스트</title>
+</head>
+<body>
+    <h1>Drink List of <strong>{{ category.category_of_drink }}</strong> category</h1>
+    <ul>
+        {% for drink in drinks %}
+          <li>
+            <strong>{{ drink.name_of_drink }}</strong>
+            <ul>
+              <li>가격 : {{ drink.price }}</li>
+              <li>온도설정 : {{ drink.temperature}}</li>
+            </ul>
+          </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
